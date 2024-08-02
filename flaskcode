@@ -1,0 +1,29 @@
+from flask import Flask
+import random
+
+app = Flask(__name__)
+
+bilgi = ["Teknolojik bağımlılık çalışması, modern bilimsel araştırmanın en ilgili alanlarından biridir.",
+       "2019'da yapılan bir araştırmaya göre, insanların %60'ından fazlası akıllı telefonlarındaki iş mesajlarına işten ayrıldıktan sonraki 15 dakika içinde yanıt veriyor.",
+       "Elon Musk, sosyal ağların içeriği görüntülemek için mümkün olduğunca fazla zaman harcamamız için bizi platformun içinde tutmak üzere tasarlandığını iddia ediyor.",
+       "Sosyal ağların olumlu ve olumsuz yanları vardır ve bu platformları kullanırken her ikisinin de farkında olmalıyız."]
+
+@app.route("/")
+def hello_world():
+    return '<a href="/example">Rastgele bir gerçeği görüntüle!</a> <a href="/plus">8 karakterli şifre oluşturucu</a>'
+
+@app.route("/example")
+def example():
+    return f'<p>{random.choice(bilgi)}</p>'
+
+@app.route("/plus")
+def sifreolustur():
+    karakter = "+-/*!&$#?=@abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+
+    sifre = ""
+    for i in range(8):
+        sifre = sifre + random.choice(karakter)
+
+    return sifre
+
+app.run(debug=True)
